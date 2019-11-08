@@ -47,9 +47,18 @@ int main()
 		<< "ownership from main:\n"
 		<< "  p.get() = " << p.get()
 		<< ", p.use_count() = " << p.use_count() << '\n';
+
 	//等待结束
-	t1.join(); t2.join(); t3.join();
-	std::cout << "All threads completed, the last one deleted\n";
+	//t1.join(); 
+	//t2.join(); 
+	//t3.join();
+	//std::cout << "All threads completed, the last one deleted\n";
+
+
+	int a = 0;
+	std::cin >> a;
+
+
 
 	return 0;
 }

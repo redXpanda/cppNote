@@ -3,8 +3,14 @@
 #
 cmake_minimum_required (VERSION 3.8)
 
-project ("cppNote")
+project ("CMakeProject2")
 
 # 包含子项目。
-add_subdirectory ("cppNote")
+add_subdirectory ("CMakeProject2")
 add_subdirectory ("shared_ptr")
+add_subdirectory ("tuple")
+add_subdirectory ("stack")
+add_subdirectory ("classConstruct")
+add_subdirectory ("CopyTest")
+add_subdirectory ("ChronoTest")
+add_subdirectory ("RecursionProblems")

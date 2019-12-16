@@ -14,3 +14,6 @@ add_subdirectory ("classConstruct")
 add_subdirectory ("CopyTest")
 add_subdirectory ("ChronoTest")
 add_subdirectory ("RecursionProblems")
+add_subdirectory ("QuickSort")
+add_subdirectory ("MapTest")
+

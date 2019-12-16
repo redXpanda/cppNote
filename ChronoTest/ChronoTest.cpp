@@ -12,6 +12,8 @@
 
 #include <iomanip>
 
+#include <sstream>
+
 using namespace std;
 using namespace chrono;
 
@@ -39,6 +41,19 @@ int main()
 	cout << std::put_time(std::localtime(&last), "%Y-%m-%d %X") << endl;	
 	cout << std::put_time(std::localtime(&last), "%Y-%m-%d %H.%M.%S") << endl;
 
+	cout << std::put_time(std::localtime(&last), "%H") << endl;
+
+	auto h = std::put_time(std::localtime(&last), "%H");
+
+	std::ostringstream stm;
+	stm << h;
+	auto h_str = stm.str();
+	int h_int = 0;
+	
+	std::istringstream is(h_str);
+	is >> h_int;
+	cout << h_int << endl;
+	
 
 	return 0;
 }

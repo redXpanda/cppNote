@@ -3,7 +3,7 @@
 #
 cmake_minimum_required (VERSION 3.8)
 
-project ("CMakeProject2")
+project ("CMakeProject")
 
 # 包含子项目。
 add_subdirectory ("CMakeProject2")
@@ -16,4 +16,4 @@ add_subdirectory ("ChronoTest")
 add_subdirectory ("RecursionProblems")
 add_subdirectory ("QuickSort")
 add_subdirectory ("MapTest")
-
+add_subdirectory ("TestFunc")

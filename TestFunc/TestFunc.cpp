@@ -1,12 +1,31 @@
 ﻿// cppNote.cpp: 定义应用程序的入口点。
 //
 
-#include "cppNote.h"
+#include <iostream>
 #include <vector>
+#include <algorithm>
+
+#include <time.h>
+
+#include <sstream>
+
+#include "MahjongUtils.h"
+
 
 using namespace std;
 
 
+char getCardServerID(char cVal, char cType)
+{
+	return  cVal | (cType << 4);
+}
+
+int getCardType(char cCard)
+{
+	int iType = cCard >> 4;
+	//int iValue = (cCard & 0xf);
+	return iType;
+}
 
 
 vector<char> makeAllCards()
@@ -28,10 +47,10 @@ vector<char> makeAllCards()
 
 vector<char> makeOneHandCards(vector<char> allCards)
 {
-	shuffle(allCards.begin(), allCards.end());
+	random_shuffle(allCards.begin(), allCards.end());
 
 	vector<char> out;
-	for (int i=0; i<13; i++)
+	for (int i = 0; i < 13; i++)
 	{
 		out.push_back(allCards[i]);
 	}
@@ -40,17 +59,6 @@ vector<char> makeOneHandCards(vector<char> allCards)
 
 }
 
-char getCardServerID(char cVal, char cType)
-{
-	return  cVal | (cType << 4);
-}
-
-int getCardType(char cCard)
-{
-	int iType = cCard >> 4;
-	//int iValue = (cCard & 0xf);
-	return iType;
-}
 
 
 struct CardCountInfo
@@ -70,7 +78,7 @@ vector<char> autoGetExchangeCards(vector<char> vccCards)
 
 	vector<int> vcTypeCount = { 0,0,0 };
 
-	for (int i = 0; i < vcTypeCount.size(); i++)
+	for (int i = 0; i < vccCards.size(); i++)
 	{
 		vcTypeCount[getCardType(vccCards[i])] ++;
 	}
@@ -103,7 +111,7 @@ vector<char> autoGetExchangeCards(vector<char> vccCards)
 			whileCount++;
 		}
 
-	} while (whileCount >= vccci.size());
+	} while (whileCount < vccci.size());
 
 
 	sort(vccci.begin(), vccci.end(), cciSort);
@@ -112,11 +120,11 @@ vector<char> autoGetExchangeCards(vector<char> vccCards)
 	vector<char> vcSelected;
 
 
-	for (int i = 0; i < vcTypeCount.size(); i++)
+	for (int i = 0; i < vccCards.size(); i++)
 	{
-		if (getCardType(vcTypeCount[i]) == rType)
+		if (getCardType(vccCards[i]) == rType)
 		{
-			vcSelected.push_back(vcTypeCount[i]);
+			vcSelected.push_back(vccCards[i]);
 			if (vcSelected.size() == 3)
 			{
 				return vcSelected;
@@ -141,19 +149,27 @@ int main()
 
 	vector<char> allCards = makeAllCards();
 
+	srand(time(0));
 
-	for (int i=0; i<10000; i++)
+	for (int i = 0; i < 10000; i++)
 	{
 		auto handCards = makeOneHandCards(allCards);
 
 		auto excards = autoGetExchangeCards(handCards);
 
+		auto handCardsName = MahjongUtils::getCardsName(handCards);
+		auto cardsName = MahjongUtils::getCardsName(excards);
+
 
 		std::ostringstream oss;
-		oss << "ex[" << excards[0] << excards[1] << excards[2] << "]" << endl;
+		oss << "num:" << i << ",handCards = " << handCardsName << endl;
+		oss << "getCards = " << cardsName;
+
+		cout << oss.str() << endl;
 
 	}
 
+	int a = 0;
 
 	return 0;
 }

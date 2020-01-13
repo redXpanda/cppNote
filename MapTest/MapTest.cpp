@@ -32,6 +32,9 @@ int main()
 	ret |= false;
 
 
+	auto one = _maids[648];
+
+
 	//auto ret2 = 0x2 & 0x2;2
 	//优先级错误
 	bool ret2 = 0x2 & 0x2 == 2;

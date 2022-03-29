@@ -15,7 +15,7 @@ int main()
 	stackInt.push(2);
 	stackInt.push(3);
 
-	auto con = stackInt._Get_container();
+	//auto con = stackInt._Get_container();
 
 	return 0;
 }
